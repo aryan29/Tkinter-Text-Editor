@@ -103,10 +103,10 @@ class Editor:
         self.editMenu.add_command(label="Cut", command=self.cut)
         self.editMenu.add_command(
             label="Copy", command=self.copy, accelerator="Ctrl+C")
-        self.window.bind_all('<Control-c>', self.copy)
+        # self.window.bind_all('<Control-c>', self.copy)
         self.editMenu.add_command(
             label="Paste", command=self.paste, accelerator="Ctrl+V")
-        self.window.bind_all('<Control-v>', self.paste)
+        # self.window.bind_all('<Control-v>', self.paste)
         self.editMenu.add_command(
             label="Undo", command=self.undo, accelerator="Ctrl+Z")
         self.window.bind_all('<Control-z>', self.undo)
@@ -191,8 +191,8 @@ class Editor:
             myFile.write(self.txt.get('1.0', END))
             myFile.close()
 
-    def copy(self, event=None):
-        print("copying")
+    def copy(self):
+        # print("copying")
         self.txt.clipboard_clear()
         self.txt.clipboard_append(self.txt.selection_get())
 
@@ -200,7 +200,7 @@ class Editor:
         self.copy()
         self.txt.delete(SEL_FIRST, SEL_LAST)
 
-    def paste(self, event=None):
+    def paste(self):
         self.txt.insert(INSERT, self.txt.clipboard_get())
         self.redraw(event)
 

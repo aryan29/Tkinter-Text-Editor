@@ -16,6 +16,7 @@ It Includes Various Features:-
 * Line Number and Word Count Features
 * Changing Font Size, Google Speak and Spell Checker is also Avilable
 * Various Attractive Themes(Blacko,Whity and Gyona)
+* Paste your text/code to pastebin in a single click
 
 # Screenshots
 ![](images/1.png)

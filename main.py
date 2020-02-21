@@ -16,6 +16,7 @@ import os
 import pyttsx3
 import enchant
 from ttkthemes import ThemedTk
+import pastebin
 
 
 class MyScroll(Text):
@@ -117,6 +118,8 @@ class Editor:
             label="Find", command=self.find, accelerator="Ctrl+F")
         self.window.bind_all('<Control-f>', self.find)
         self.viewMenu.add_command(label="Font Size", command=self.font_size)
+        self.viewMenu.add_command(
+            label="Paste on pastebin", command=self.paste_on)
         self.viewMenu.add_command(label="Speak It", command=self.speak)
         self.viewMenu.add_command(
             label="Spell Check", command=self.spell_check)
@@ -234,6 +237,22 @@ class Editor:
         closeBtn = ttk.Button(root, text="Close", command=on_closing)
         closeBtn.grid(row=1, column=1, pady="10", padx="10", sticky="EWS")
         root.protocol("WM_DELETE_WINDOW", on_closing)
+
+    def paste_on(self, event=None):
+        def copy_link(self, link):
+            self.txt.clipboard_clear()
+            self.txt.clipboard_append(link)
+        root = Toplevel(self.window)
+        root.title("Link")
+        root.transient(self.window)
+        root.focus_force()
+        root.grid_columnconfigure(0, weight=1)
+        root.grid_rowconfigure(0, weight=1)
+        link = pastebin.pastebin(self.txt.get('1.0', END))
+        lb = ttk.Label(root, text=link)
+        lb.grid(row=0, column=0, padx="50", pady="20")
+        bt = ttk.Button(root, text="Copy", command=copy_link(self, link))
+        bt.grid(row=1, column=0, padx="50", pady="20")
 
     def selectall(self, event=None):
         self.txt.tag_add('sel', '1.0', 'end')
